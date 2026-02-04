@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <title>
+            Minecraft Server
+        </title>
+    </head>
+    <body>
+        <p>
+            So I have a private minecraft server for myself and one of my friends.
+            <br>
+            Here's the server status: <a id="status"></a>
+            <br>
+            This server is running off of an oracle server, using an SSH connection from my phone to stay online
+            <br>
+            Using <a href="https://termux.dev/en/">Termux</a>, a terminal software for Android devices, I create an SSH connection between my phone and the oracle server.
+            <br>
+            Android has a background app killer, however, so this kills the connection every 2-4 hours. I have yet to find a workaround for this.
+            <br>
+            Here's what I may be able to do:
+            <ul>
+                <li>
+                    break the code in my phone that keeps sleeping it
+                </li>
+                <li>
+                    get a second device and jailbreak it
+                </li>
+                <li>
+                    find some program that allows me to prevent app-sleeping
+                </li>
+            </ul>
+        </p>
+        <script>
+            var m=0;
+            document.getElementById("status").innerHTML="Offline";
+            $.getJSON("https://api.mcsrvstat.us/3/149.130.210.202", function(result){
+                $.each(result, function(i, field){
+                    if(m==6){
+                        if(field==true)
+                        document.getElementById("status").innerHTML="Online";
+                        
+                    }
+                    m++;
+                });
+            });
+            //$("#status").load("https://api.mcsrvstat.us/3/149.130.210.202");
+        </script>
+    </body>
+</html>
